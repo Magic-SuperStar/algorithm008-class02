@@ -11,5 +11,6 @@ public class Transpose {
                 ant[i][j] = A[j][i];
             }
         }
+        return ant;
     }
 }
