@@ -9,7 +9,7 @@ public class MoveZeroes {
     public void test() {
         MoveZeroes zeroes = new MoveZeroes();
         int[] nums = {0, 1, 0, 3, 12};
-        zeroes.moveZeroes2(nums);
+        zeroes.moveZeroes3(nums);
         System.out.println(Arrays.toString(nums));
     }
 
@@ -47,6 +47,25 @@ public class MoveZeroes {
         }
         for (int i = 0; i < size; i++) {
             nums[i] = untemp[i];
+        }
+    }
+
+    /**
+     * 为零时交互值
+     *
+     * @param nums
+     */
+    public void moveZeroes3(int[] nums) {
+        int temp = 0;//某个数(零)
+        for (int i = 0, j = 0; i < nums.length; i++) {
+            //i 为 旧(数组)，j 为 新(数组)
+            if (nums[i] != temp) {
+                nums[j] = nums[i];
+                if (i != j) {//i与j交互数值
+                    nums[i] = temp;
+                }
+                j++;
+            }
         }
     }
 }
