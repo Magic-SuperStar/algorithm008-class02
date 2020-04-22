@@ -2,6 +2,7 @@ package org.geekbang.ljz.Week_02;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,7 +10,7 @@ import java.util.regex.Pattern;
 public class Anagram {
     @Test
     public void testAnagram() {
-        boolean isTrue = isAnagram("car","cat");//"anagram", "nagaram"
+        boolean isTrue = isAnagram1("anagram", "nagaram");//"anagram", "nagaram"
         System.out.println(isTrue);
     }
 
@@ -38,5 +39,18 @@ public class Anagram {
             return true;
         }
         return false;
+    }
+
+    public boolean isAnagram1(String s, String t) {
+        if (s == null || t == null || s.length() != t.length() || s.equals(t)) return false;
+        char[] ss = s.toCharArray();
+        char[] ts = t.toCharArray();
+        Arrays.sort(ss);
+        Arrays.sort(ts);
+//        if (Arrays.equals(ss,ts)) return true;
+        for (int i = 0; i < s.length(); i++) {
+            if (ss[i] != ts[i]) return false;
+        }
+        return true;
     }
 }
