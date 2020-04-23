@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class Anagram {
     @Test
     public void testAnagram() {
-        boolean isTrue = isAnagram3("anagram", "nagaram");//"anagram", "nagaram"
+        boolean isTrue = isAnagram4("anagram", "nagaram");//"anagram", "nagaram"
         System.out.println(isTrue);
     }
 
@@ -78,6 +78,19 @@ public class Anagram {
         }
         for (int v : counter.values()) {
             if (v != 0) return false;
+        }
+        return true;
+    }
+
+    public boolean isAnagram4(String s, String t) {
+        if (s == null || t == null || s.length() != t.length()) return false;
+        int[] counter = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            counter[s.charAt(i) - 'a']++;
+        }
+        for (int i = 0, v; i < t.length(); i++) {
+            v = counter[t.charAt(i) - 'a']--;
+            if (v < 0) return false;
         }
         return true;
     }
