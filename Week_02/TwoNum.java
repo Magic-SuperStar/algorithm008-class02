@@ -21,7 +21,7 @@ public class TwoNum {
     @Test
     public void testTwoNum() {
         int[] nums = {2, 7, 11, 15};
-        int[] temps = twoNum1(nums, 9);
+        int[] temps = twoNum2(nums, 9);
         System.out.println(Arrays.toString(temps));
     }
 
@@ -44,6 +44,20 @@ public class TwoNum {
             if (map.containsKey(temp) && map.get(temp) != i) {
                 return new int[]{i, map.get(temp)};
             }
+        }
+        throw new IllegalArgumentException("没有匹配数字");
+    }
+
+    //问题是第一次temp==nums[i]时
+    public int[] twoNum2(int[] nums, int target) {
+        //容量(空间)
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0, temp; i < nums.length; i++) {
+            temp = target - nums[i];
+            //从容量中找O(1)的时间
+            if (map.containsKey(temp) && map.get(temp) != i) return new int[]{map.get(temp), i};
+            //O(n)空间
+            map.put(nums[i], i);
         }
         throw new IllegalArgumentException("没有匹配数字");
     }
