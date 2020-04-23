@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class Anagram {
     @Test
     public void testAnagram() {
-        boolean isTrue = isAnagram1("anagram", "nagaram");//"anagram", "nagaram"
+        boolean isTrue = isAnagram3("anagram", "nagaram");//"anagram", "nagaram"
         System.out.println(isTrue);
     }
 
@@ -50,6 +50,34 @@ public class Anagram {
 //        if (Arrays.equals(ss,ts)) return true;
         for (int i = 0; i < s.length(); i++) {
             if (ss[i] != ts[i]) return false;
+        }
+        return true;
+    }
+
+    public boolean isAnagram2(String s, String t) {
+        if (s == null || t == null || s.length() != t.length()) return false;
+        int[] counter = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            counter[s.charAt(i) - 'a']++;
+            counter[t.charAt(i) - 'a']--;
+        }
+        for (int v : counter) {
+            if (v != 0) return false;
+        }
+        return true;
+    }
+
+    public boolean isAnagram3(String s, String t) {
+        if (s == null || t == null || s.length() != t.length()) return false;
+        HashMap<Character, Integer> counter = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            Integer v = counter.get(s.charAt(i));
+            counter.put(s.charAt(i), v == null ? 1 : ++v);
+            Integer tv = counter.get(t.charAt(i));
+            counter.put(t.charAt(i), tv == null ? -1 : --tv);
+        }
+        for (int v : counter.values()) {
+            if (v != 0) return false;
         }
         return true;
     }
